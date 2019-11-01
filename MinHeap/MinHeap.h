@@ -50,7 +50,7 @@ public:
 
 	void print(std::ostream& os)
 	{
-		for (int i = 0; i < data.size(); i++)
+		for (int i = 1; i < data.size(); i++)
 		{
 			os << *data.at(i) << " ";
 		}
