@@ -10,11 +10,11 @@ class MinHeap
 	std::vector<T*> data;
 	void bubbleUp(int loc)
 	{
-		if (loc > 1 && *data.at(loc) > *data.at(loc / 2))
+		if (loc > 1 && *data.at(loc) < *data.at(loc / 2))
 		{
 			// print(std::cout);
 			// std::cout << std::endl;
-			// std::cout << loc << ": BUBBLING: " << *data.at(loc) << " > " << *data.at(loc/2) << std::endl;
+			// std::cout << loc << ": BUBBLING: " << *data.at(loc) << " < " << *data.at(loc/2) << std::endl;
 			T* temp = data.at(loc / 2);
 			data.at(loc / 2) = data.at(loc);
 			data.at(loc) = temp;
@@ -22,6 +22,26 @@ class MinHeap
 			// std::cout << std::endl;
 			// std::cout << std::endl;
 			bubbleUp(loc / 2);
+		}
+	}
+
+	void heapify(int loc)
+	{
+		if (loc > 0)
+		{
+			T* temp = data.at(loc);
+			if (((2 * loc) < data.size()) && (*data.at(loc) > *data.at(2 * loc)))
+			{
+				data.at(loc) = data.at(2 * loc);
+				data.at(2 * loc) = temp;
+				heapify(2 * loc);
+			}
+			else if (((2 * loc + 1) < data.size()) && (*data.at(loc) > *data.at(2 * loc + 1)))
+			{
+				data.at(loc) = data.at(2 * loc + 1);
+				data.at(2 * loc + 1) = temp;
+				heapify(2 * loc + 1);
+			}
 		}
 	}
 
@@ -44,8 +64,20 @@ public:
 
 	void insert(T* val)
 	{
+		// std::cout << "--INSERTING: " << *val << std::endl;
 		data.insert(data.end(), val);
 		bubbleUp(data.size() - 1);
+	}
+
+	void delMin()
+	{
+		if (data.size() > 1)
+		{
+			std::cout << "--DELETING: " << *data.at(1) << std::endl;
+			data.at(1) = data.at(data.size() - 1);
+			data.pop_back();
+			heapify(1);
+		}
 	}
 
 	inline int powerOf2(int p)

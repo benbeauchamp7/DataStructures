@@ -7,16 +7,18 @@ int main(int argc, char** argv)
 	int* a = new int(50);
 	MinHeap<int> heap(a);
 
-	heap.insert(new int(55));
-	heap.insert(new int(52));
-	heap.insert(new int(70));
-	heap.insert(new int(25));
-	heap.insert(new int(123));
-	heap.insert(new int(234));
-	heap.insert(new int(14));
-	heap.insert(new int(12));
+	for (int i = 50; i > -50; i -= 5)
+	{
+		heap.insert(new int(i));
+	}
 
 	heap.print(std::cout);
+	std::cout << std::endl;
+
+	heap.delMin();
+	
+	heap.print(std::cout);
+	std::cout << std::endl;
 	
 	return 0;
 }
