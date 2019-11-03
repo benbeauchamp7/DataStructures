@@ -16,8 +16,11 @@ int main(int argc, char** argv)
 	Tree.insert(new int(22));
 
 	Tree.print(std::cout);
-	Tree.makeEmpty();
+
+	Tree.remove(new int(101));
 	Tree.print(std::cout);
+
+	std::cout << Tree.find(new int(50));
 	
 	return 0;
 }
